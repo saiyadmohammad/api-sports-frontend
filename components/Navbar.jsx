@@ -5,11 +5,13 @@ import Image from "next/image";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation'
+import Link from "next/link";
 
 export default function Navbar() {
   const [isOpen, setIsOpen]  = useState(false);
-  const [selected, setSelected]  = useState(menuItems[0].name);
   const testRef = useRef(null);
+  const pathName = usePathname();
 
   useEffect(() => {
     function handleClick(event){
@@ -17,7 +19,6 @@ export default function Navbar() {
         setIsOpen(false);
       }
     }
-
     document.addEventListener('mousedown', handleClick);
   }, []);
 
@@ -38,9 +39,9 @@ export default function Navbar() {
           <ul className="hidden font-medium lg:flex space-x-2"> 
             {menuItems.map((menu) => (
               <li key={menu.id}>
-                <a className={`${menu.name === selected ? "bg-gray-200" : ""} rounded-lg px-5 py-3 cursor-pointer text-black/90 text-lg`} onClick={() => setSelected(menu.name)} >{menu.name}</a>
+                <Link href={menu.href} className={`${menu.href === pathName ? "bg-gray-200" : ""} rounded-lg px-5 py-3 cursor-pointer text-black/90 text-lg`} >{menu.name}</Link>
               </li> 
-            ))}
+            ))} 
           </ul>
         </div>
       </nav>
@@ -49,8 +50,8 @@ export default function Navbar() {
       <div className={`transition-all duration-300 overflow-hidden bg-gray-100 rounded-xs shadow-sm border border-gray-100 ${isOpen? "max-h-96 border-t": "max-h-0"}`}>
         <ul className="p-10 font-medium lg:hidden flex flex-col gap-4"> 
           {menuItems.map((menu) => (
-            <li className={`${menu.name === selected ? "bg-gray-200" : ""} py-2 rounded-lg`} key={menu.name}>
-              <a className={` px-5 text-black/90 text-lg`} onClick={() => setSelected(menu.name)}>{menu.name}</a>
+            <li className={`${menu.href === pathName ? "bg-gray-200" : ""} py-2 rounded-lg`} key={menu.name}>
+              <Link href={menu.href} className={` px-5 text-black/90 text-lg`}>{menu.name}</Link>
             </li>
           ))} 
         </ul>

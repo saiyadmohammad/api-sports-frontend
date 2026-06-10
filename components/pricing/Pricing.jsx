@@ -15,7 +15,7 @@ export default function Pricing() {
           </div>
         </div>
 
-        <div className={`flex gap-10 flex-col`}>
+        <div className={`flex gap-10 flex-col md:flex-row`}>
           {pricingData.map((item) => (
             <div key={item.id} className='flex flex-col gap-4 border border-gray-200 gradient-border shadow-sm px-8 py-6 rounded-xl'>
               <div>

@@ -6,19 +6,19 @@ import InsightsNews from '@/components/insightsNews/InsightsNews'
 import Leagues from '@/components/league/Leagues'
 import Navbar from '@/components/Navbar'
 import Pricing from '@/components/pricing/Pricing'
-import { footBallData } from '@/lib/data'
+import { cricketData } from '@/lib/data'
 import React from 'react'
 
-export default function football() {
+export default function Cricket() {
   return (
     <>
       <Navbar />
-      <SportsHero data={footBallData.hero_section}/>
-      <Leagues data={footBallData.supported_competitions}/>
-      <DataCoverage  data={footBallData.supported_competitions}/>
+      <SportsHero data={cricketData.hero_section}/>
+      <Leagues data={cricketData.supported_competitions}/>
+      <DataCoverage  data={cricketData.supported_competitions}/>
       <Endpoints />
       <Pricing />
-      <InsightsNews data={footBallData.blogs}/>
+      <InsightsNews data={cricketData.blogs}/>
       <Footer />
     </>
   )

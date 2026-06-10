@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function StatesCard({footballHeroData, footballHeroIconMap}) {
   return (
-    <div className="flex gap-14 mt-10">
+    <div className="flex gap-8 mt-10">
       {footballHeroData.map((item) => {
         const Icon = footballHeroIconMap[item.icon];
         return(

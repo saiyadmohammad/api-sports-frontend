@@ -1,9 +1,11 @@
-import { leaguesData } from '@/lib/data'
+"use client"
 import { Check, Search } from 'lucide-react'
 import Image from 'next/image'
-import React from 'react'
 
-export default function DataCoverage() {
+export default function DataCoverage({data}) {
+  const columns = ['live', 'fixtures', 'results', 'standings', 'players', 'teams']
+  console.log(data);
+
   return (
     <section className='section-space'>
       <div className='container-width flex gap-10 lg:flex-row flex-col'>
@@ -24,39 +26,38 @@ export default function DataCoverage() {
             <div className='text-sm px-4 py-2 border border-gray-200 rounded-full'>Popular</div>
             <div className='text-sm px-4 py-2 border border-gray-200 rounded-full'>Europe</div>
             <div className='text-sm px-4 py-2 border border-gray-200 rounded-full'>Asia</div>
-    
           </div>
         </div>
 
         <div className='flex-5 flex flex-col gap-2 p-6 bg-gray-100 shadow-sm rounded-2xl'>
           <div className='grid grid-cols-8 mb-5'>
             <div className='col-span-2 font-bold'>League</div>
-            <div className='font-bold'>Live</div>
-            <div className='font-bold'>Fixtures</div>
-            <div className='font-bold'>Results</div>
-            <div className='font-bold'>Standings</div>
-            <div className='font-bold'>Players</div>
-            <div className='font-bold'>Teams</div>
+            {columns.map((item, i) => (
+              <div key={i} className='flex justify-center'>
+                <div className='font-bold'>{item}</div>
+              </div>
+            ))}
           </div>
 
-          {leaguesData.map((item) => (
+          {data.map((item) => (
             <div className='grid grid-cols-8 ' key={item.name}>
               <div className='col-span-2 flex gap-4'>
-                {/* <Image src={item.img} height={25} width={30}  alt={item.name}/> */}
                 <Image className='w-10 h-10' src={item.img} height={50} width={50}  alt={item.name}/>
-                {/* <img src={item.img} className='w-10 h-10'/> */}
-                {/* <h3>{item.name}</h3> */}
                 <div className='flex flex-col'>
                   <div className='font-bold'>{item.name}</div>
                   <span className='text-sm'>{item.country}</span>
                 </div>
               </div>
-              <Check className='text-emerald-600' size={18}/>
-              <Check className='text-emerald-600' size={18}/>
-              <Check className='text-emerald-600' size={18}/>
-              <Check className='text-emerald-600' size={18}/>
-              <Check className='text-emerald-600' size={18}/>
-              <Check className='text-emerald-600' size={18}/>
+
+              {columns.map((feature, i) => (
+                <div key={i} className='flex justify-center'>
+                  {item.features[feature] ? (
+                    <Check className='text-emerald-600' size={18} />
+                  ) : (
+                    <span className='text-gray-300'>—</span>
+                  )}
+                </div>
+              ))}
             </div>
           ))}
         </div>
