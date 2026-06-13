@@ -1,18 +1,19 @@
 import { MoveRight } from "lucide-react";
 import Image from "next/image";
 
-export default function Widgets() {
+export default function Widgets( { data }) {
+  const { heading, title, features } = data.section_data;
+
   return (
     <section className="section-space">
       <div className="container-width flex flex-col lg:flex-row gap-8">
         <div className="flex-1">
-          <div className="text-sm font-bold gradient-text uppercase tracking-wider mb-2">EMBED. CUSTOMIZE. DELIVER.</div>
-          <h2 className="mb-4">Widgets your users will love</h2>
+          <div className="text-sm font-bold gradient-text uppercase tracking-wider mb-2">{heading}</div>
+          <h2 className="mb-4">{title}</h2>
           <ul className="list-disc list-inside text-gray-700 mb-6">
-            <li>Live scores & match details</li>
-            <li>League tables & standings</li>
-            <li>Player & team statistics</li>
-            <li>Fully responsive & customizable</li>
+            {features.map((feature) => (
+              <li key={feature}>{feature}</li>
+            ))}
           </ul>
 
           <a href="#" className="text-sm font-bold gradient-text tracking-wider">View all widgets <MoveRight size={20} className="inline-block ml-2 text-pink-400" /></a>

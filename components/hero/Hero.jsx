@@ -1,15 +1,17 @@
 import Image from "next/image";
 import { FileText, MoveRight, Zap } from "lucide-react";
 
-export default function Hero() {
+export default function Hero({ data }) {
+  const { title_first, title_second, subtitle, heading } = data.section_data;
+
   return (
       <section className="section-space bg-gray-50">
         <div className="container-width flex flex-col items-center gap-8 lg:flex-row ">
           <div className="flex gap-6 flex-col items-start">
-            <div className="flex items-center text-xs font-medium text-gray-500 border-2 border-gray-300 px-4 py-2 rounded-full"> <Zap size={16} className="mr-2"/> REAL-TIME SPORTS DATA API</div>
-            <h1 className=" mb-4">Real-time <br/> <span className="gradient-text">sports data </span></h1>
+            <div className="flex items-center text-xs font-medium text-gray-500 border-2 border-gray-300 px-4 py-2 rounded-full"> <Zap size={16} className="mr-2"/> {heading}</div>
+            <h1 className=" mb-4">{title_first} <br/> <span className="gradient-text">{title_second} </span></h1>
             <p className="text-lg text-gray-700 mb-6">
-              Power your app with live scores, standings, stats, and more. Built by developers, for developers.
+              {subtitle}
             </p>
 
             <div className="flex gap-4">

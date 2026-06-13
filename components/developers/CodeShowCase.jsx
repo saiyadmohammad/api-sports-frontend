@@ -5,15 +5,14 @@ import { codeSnipped as items } from '@/lib/data';
 import React, { useState } from 'react'
 
 
-export default function CodeShowCase() {
-  const [activeTab, setActiveTab] = useState(items[0].label);
-
-  const activeItem = items.find((item) => item.label == activeTab);
+export default function CodeShowCase({ codes }) {
+  const [activeTab, setActiveTab] = useState(codes[0].label);
+  const activeItem = codes.find((item) => item.label == activeTab);
   
   return (
     <div className="h-full w-full bg-black/90 p-6 flex gap-5 flex-col">
       <div className='flex text-white/90 gap-10'>
-        {items.map((item) => (
+        {codes.map((item) => (
           <div 
             key={item.id} 
             onClick={() => setActiveTab(item.label)} 
