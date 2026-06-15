@@ -8,17 +8,27 @@ import Navbar from '@/components/Navbar'
 import Pricing from '@/components/pricing/Pricing'
 import { footBallData } from '@/lib/data'
 import React from 'react'
+import { getFootBallPageData } from '@/lib/api/home'
 
-export default function football() {
+export default async function football() {
+  let footBallPageData  = await getFootBallPageData();
+  // console.log(footBallPageData);
+
+  const getSectionData = (type) => {
+    return footBallPageData.find(section => section.type === type);
+  }
+
+  console.log(getSectionData(''));
+
   return (
     <>
       <Navbar />
-      <SportsHero data={footBallData.hero_section}/>
-      <Leagues data={footBallData.supported_competitions}/>
-      <DataCoverage  data={footBallData.supported_competitions}/>
-      <Endpoints />
-      <Pricing />
-      <InsightsNews data={footBallData.blogs}/>
+      <SportsHero data={getSectionData('hero')}/>
+      <Leagues data={getSectionData('competitions')}/>
+      <DataCoverage data={getSectionData('data_coverage')}/>
+      <Endpoints data={getSectionData('developer')}/>
+      <Pricing data={getSectionData('pricing')}/>
+      <InsightsNews data={getSectionData('blogs')}/>
       <Footer />
     </>
   )

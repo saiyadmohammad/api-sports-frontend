@@ -9,18 +9,15 @@ import Features from "@/components/featuresSection/Features";
 import Widgets from "@/components/widgets/Widgets";
 import Cta from "@/components/cta/Cta";
 import Footer from "@/components/Footer";
+import { getHomePageData } from "@/lib/api/home";
 
 export default async function Home() {
 
-  let response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/test`);
-  console.log(response);
-  
-  if(!response.ok) {
-    throw new Error("Failed to fetch data");
+  let homePageData  = await getHomePageData();
+
+  const getSectionData = (type) => {
+    return homePageData.find(section => section.type === type);
   }
-  
-  let data = await response.json();
-  console.log(data[0].section[0]);
 
 
   return (
@@ -28,31 +25,31 @@ export default async function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <Hero data={data[0].section[0]} />
+      <Hero data={getSectionData('hero')} />
 
       {/* Features Section */}
-      <Features data={data[0].section[1]} />
+      <Features data={getSectionData('feature')} />
 
       {/* Widgets Section */}
-      <Widgets data={data[0].section[2]} />
+      <Widgets data={getSectionData('widget')} />
 
       {/* All Sports Section */}
-      <AllSports />
+      <AllSports data={getSectionData('sports')} />
 
       {/* Developers Section */}
-      <Developers data={data[0].section[3]} />
+      <Developers data={getSectionData('developer')} />
 
       {/* Seamless integrations Section */}
-      <SeamlessIntegration />
+      <SeamlessIntegration data={getSectionData('seamless_integrations')} />
 
       {/* Why Developer Choose Section */}
-      <WhyChoose />
+      <WhyChoose data={getSectionData('why_choose')} />
 
       {/* Blog Section */}
-      <Blogs />
+      <Blogs data={getSectionData('blog')} />
 
       {/* Call to action  */}
-      <Cta />
+      <Cta data={getSectionData('cta_section')} />
 
       <Footer />
     </>

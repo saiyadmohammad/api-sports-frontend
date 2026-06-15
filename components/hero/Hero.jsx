@@ -2,7 +2,8 @@ import Image from "next/image";
 import { FileText, MoveRight, Zap } from "lucide-react";
 
 export default function Hero({ data }) {
-  const { title_first, title_second, subtitle, heading } = data.section_data;
+  console.log(data);
+  const { title_first, title_second, subtitle, heading, image } = data.section_data;
 
   return (
       <section className="section-space bg-gray-50">
@@ -22,7 +23,7 @@ export default function Hero({ data }) {
           
           <div className="relative  aspect-5/3 w-full">
             <Image
-              src="/assets/sports-api-hero.png"
+              src={image}
               alt="Sports API Hero Image"
               fill
               className="object-cover"
