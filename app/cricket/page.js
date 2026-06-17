@@ -24,10 +24,10 @@ export default async function Cricket() {
   return (
     <>
       <Navbar />
-      <SportsHero data={getSectionData('hero')}/>
-      <Leagues data={getSectionData('data_coverage')}/>
-      <DataCoverage  data={getSectionData('data_coverage')}/>
-      <Endpoints data={getSectionData('developer')}/>
+      <SportsHero data={getSectionData('hero_cricket')}/>
+      <Leagues data={getSectionData('data_coverage_cricket')}/>
+      <DataCoverage  data={getSectionData('data_coverage_cricket')}/>
+      <Endpoints data={getSectionData('developer_cricket')}/>
       <Pricing data={getSectionData('pricing')}/>
       <InsightsNews data={getSectionData('blogs')}/>
       <Footer />

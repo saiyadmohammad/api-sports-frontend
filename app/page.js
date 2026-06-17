@@ -25,7 +25,7 @@ export default async function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <Hero data={getSectionData('hero')} />
+      <Hero data={getSectionData('hero_home')} />
 
       {/* Features Section */}
       <Features data={getSectionData('feature')} />
@@ -37,7 +37,7 @@ export default async function Home() {
       <AllSports data={getSectionData('sports')} />
 
       {/* Developers Section */}
-      <Developers data={getSectionData('developer')} />
+      <Developers data={getSectionData('developer_home')} />
 
       {/* Seamless integrations Section */}
       <SeamlessIntegration data={getSectionData('seamless_integrations')} />
@@ -46,7 +46,7 @@ export default async function Home() {
       <WhyChoose data={getSectionData('why_choose')} />
 
       {/* Blog Section */}
-      <Blogs data={getSectionData('blog')} />
+      <Blogs data={getSectionData('blogs')} />
 
       {/* Call to action  */}
       <Cta data={getSectionData('cta_section')} />
