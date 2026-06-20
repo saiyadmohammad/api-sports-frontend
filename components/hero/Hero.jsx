@@ -2,7 +2,6 @@ import Image from "next/image";
 import { FileText, MoveRight, Zap } from "lucide-react";
 
 export default function Hero({ data }) {
-  console.log(data);
   const { title_first, title_second, subtitle, heading, image } = data.section_data;
 
   return (
@@ -28,6 +27,7 @@ export default function Hero({ data }) {
               fill
               className="object-cover"
               loading="eager"
+              unoptimized
             />
           </div>
         </div>

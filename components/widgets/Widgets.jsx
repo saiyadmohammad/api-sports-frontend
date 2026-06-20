@@ -26,7 +26,7 @@ export default function Widgets( { data }) {
             <div className="flex flex-col gap-6 py-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <Image src="/assets/players-pic/litton-das.webp" alt="Widget Scores" width={35} height={35} className="rounded-full"/>
+                  <Image src="/assets/players-pic/litton-das.webp" alt="Widget Scores" width={35} height={35} className="rounded-full" unoptimized/>
                   <p className="font-bold ml-2">L. Das</p>
                 </div>
                 <p className="font-bold">27</p>
@@ -34,7 +34,7 @@ export default function Widgets( { data }) {
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <Image src="/assets/players-pic/sarfaraz-ahmed.webp" alt="Widget Scores" width={35} height={35} className="rounded-full"/>
+                  <Image src="/assets/players-pic/sarfaraz-ahmed.webp" alt="Widget Scores" width={35} height={35} className="rounded-full" unoptimized/>
                   <p className="font-bold ml-2">S. Ahmed</p>
                 </div>
                 <p className="font-bold">24</p>
@@ -42,7 +42,7 @@ export default function Widgets( { data }) {
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <Image src="/assets/players-pic/shaheen-afridi.webp" alt="Widget Scores" width={35} height={35} className="rounded-full"/>
+                  <Image src="/assets/players-pic/shaheen-afridi.webp" alt="Widget Scores" width={35} height={35} className="rounded-full" unoptimized/>
                   <p className="font-bold ml-2">S Afridi</p>
                 </div>
                 <p className="font-bold">20</p>
@@ -54,14 +54,14 @@ export default function Widgets( { data }) {
             <h3 className="mb-4">Live Match</h3>
 
             <div className="flex gap-6 pt-6 pb-4 mb-4 items-start justify-between border-b-2 border-gray-200">
-              <Image src="/assets/teams/arsenal.png" alt="Widget Scores" width={45} height={45} className="rounded-full"/>
+              <Image src="/assets/teams/arsenal.png" alt="Widget Scores" width={45} height={45} className="rounded-full" unoptimized/>
 
               <div className="font-bold flex flex-col items-center mt-1 gap-1">
                 <div className="text-2xl">2 - 1</div>
                 <div className="text-xs">67.23</div>
               </div>
 
-              <Image src="/assets/teams/liverpool.png" alt="Widget Scores" width={45} height={45} className="rounded-full"/>
+              <Image src="/assets/teams/liverpool.png" alt="Widget Scores" width={45} height={45} className="rounded-full" unoptimized/>
             </div>
 
             <div className="flex flex-col gap-2">
@@ -100,7 +100,7 @@ export default function Widgets( { data }) {
                 <div className="flex">
                   <div>1</div>
                   <div className="ml-6 flex">
-                    <Image src="/assets/teams/man-city.png" alt="Widget Scores" width={25} height={25} className="rounded-full"/>
+                    <Image src="/assets/teams/man-city.png" alt="Widget Scores" width={25} height={25} className="rounded-full" unoptimized />
                     <div className="ml-2">Man City</div>
                   </div>
                 </div>
@@ -111,7 +111,7 @@ export default function Widgets( { data }) {
                 <div className="flex">
                   <div>2</div>
                   <div className="ml-6 flex">
-                    <Image src="/assets/teams/arsenal.png" alt="Widget Scores" width={25} height={25} className="rounded-full"/>
+                    <Image src="/assets/teams/arsenal.png" alt="Widget Scores" width={25} height={25} className="rounded-full" unoptimized/>
                     <div className="ml-2">Arsenal</div>
                   </div>
                 </div>
@@ -122,7 +122,7 @@ export default function Widgets( { data }) {
                 <div className="flex">
                   <div>3</div>
                   <div className="ml-6 flex">
-                    <Image src="/assets/teams/liverpool.png" alt="Widget Scores" width={25} height={25} className="rounded-full"/>
+                    <Image src="/assets/teams/liverpool.png" alt="Widget Scores" width={25} height={25} className="rounded-full" unoptimized/>
                     <div className="ml-2">Liverpool</div>
                   </div>
                 </div>
@@ -133,7 +133,7 @@ export default function Widgets( { data }) {
                 <div className="flex">
                   <div>4</div>
                   <div className="ml-6 flex">
-                    <Image src="/assets/teams/aston-villa.png" alt="Widget Scores" width={25} height={25} className="rounded-full"/>
+                    <Image src="/assets/teams/aston-villa.png" alt="Widget Scores" width={25} height={25} className="rounded-full" unoptimized/>
                     <div className="ml-2">Aston Villa</div>
                   </div>
                 </div>

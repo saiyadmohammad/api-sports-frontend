@@ -20,7 +20,7 @@ export default function InsightsNews({data}) {
         <div className='flex-5 flex flex-col md:flex-row gap-4'>
           {blogs.map((item) => (
             <div key={item.id} className='border border-gray-200 rounded-xl overflow-hidden max-w-100'>
-              <Image className='h-34 w-full object-cover' src={item.img} alt={item.title} height={200} width={200}/>
+              <Image className='h-34 w-full object-cover' src={item.img} alt={item.title} height={200} width={200} unoptimized/>
               <div className='flex flex-col items-start gap-4 p-4'>
                 {/* <span className='text-sm border  border-gray-200 px-4 py-2 rounded-full absolute'>{item.type}</span> */}
                 <div >

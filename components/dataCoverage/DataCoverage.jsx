@@ -43,7 +43,7 @@ export default function DataCoverage({data}) {
           {all_features.map((item) => (
             <div className='grid grid-cols-8 ' key={item.name}>
               <div className='col-span-2 flex gap-4'>
-                <Image className='w-10 h-10' src={item.img} height={50} width={50}  alt={item.name}/>
+                <Image className='w-10 h-10' src={item.img} height={50} width={50}  alt={item.name} unoptimized/>
                 <div className='flex flex-col'>
                   <div className='font-bold'>{item.name}</div>
                   <span className='text-sm'>{item.country}</span>

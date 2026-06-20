@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function WhyChoose({data}) {
   const {heading, features} = data.section_data;
-
+  
   return (
     <section className="section-space">
       <div className="container-width lg:px-24">
@@ -12,7 +12,7 @@ export default function WhyChoose({data}) {
           {features.map((feature) => (
             <div key={feature.id} className="flex items-center gap-2">
               <div className="p-5 rounded-full border border-gray-100 shadow-xs">
-                <Image className="" src={feature.img} height={64} width={64} alt="react" />
+                <Image className="" src={feature.img} height={64} width={64} alt="react" unoptimized/>
               </div>
 
               <div className="">

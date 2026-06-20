@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="container-width">
         <div className='grid lg:grid-cols-6 md:grid-cols-2 gap-10'>
           <div className='md:col-span-2'>
-            <Image className="" src="/assets/logo-light.png" width={60} height={60} alt="Logo"/>
+            <Image className="" src="/assets/logo-light.png" width={60} height={60} alt="Logo" unoptimized/>
             <p className='mt-2'>The most reliable real-time sports data API for developers and businesses.</p>
 
             <div className='flex gap-4 mt-4'>

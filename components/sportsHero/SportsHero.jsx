@@ -25,7 +25,7 @@ export default function SportsHero({data}) {
         </div>
         
         <div className="flex items-center justify-center">
-          <Image className="w-full" src={image} height={700} width={700} alt="sports-img" />
+          <Image className="w-full" src={image} height={700} width={700} alt="sports-img" unoptimized/>
         </div>
       </div>
     </section>

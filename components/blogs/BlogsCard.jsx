@@ -18,7 +18,7 @@ export default function BlogsCard({blogsData}) {
           </div>
 
           <div className="flex items-center">
-            <Image className="" src={blog.img} height={70} width={250} alt="hello"/>
+            <Image className="" src={blog.img} height={70} width={250} alt="hello" unoptimized/>
           </div>
         </div>
       ))}

@@ -8,7 +8,7 @@ import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation'
 import Link from "next/link";
 
-export default function Navbar() {
+export default function Navbar({data}) {
   const [isOpen, setIsOpen]  = useState(false);
   const testRef = useRef(null);
   const pathName = usePathname();
@@ -27,7 +27,7 @@ export default function Navbar() {
       <nav className="py-5 container-width">
         <div className="flex items-center justify-between relative">
           <a href="/">
-            <Image className="" src="/assets/logo-light.png" width={40} height={40} alt="Logo"/>
+            <Image className="" src={data.logo} width={40} height={40} alt="Logo" unoptimized/>
           </a>
 
           <div>

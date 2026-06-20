@@ -27,7 +27,7 @@ export default function Cta({data}) {
             </ul>
           </div> */}
 
-          <Image className="hidden lg:inline" src={image} height={70} width={280} alt="hello"/>
+          <Image className="hidden lg:inline" src={image} height={70} width={280} alt="hello" unoptimized/>
         </div>
       </div>
     </section>
