@@ -8,28 +8,29 @@ import Navbar from '@/components/Navbar'
 import Pricing from '@/components/pricing/Pricing'
 import { cricketData } from '@/lib/data'
 import React from 'react'
-import { getCricketPageData } from '@/lib/api/home'
+import { getCricketPageData } from '@/lib/api/api'
+import Blogs from '@/components/blogs/Blogs'
 
 export default async function Cricket() {
-   let cricketPageData  = await getCricketPageData();
-    // console.log(footBallPageData);
+   let cricketPageData = await getCricketPageData();
   
     const getSectionData = (type) => {
-      return cricketPageData.find(section => section.type === type);
+      return cricketPageData.page.section.find(section => section.type === type);
     }
-
-    console.log(cricketPageData)
-
+    const getNavData = (type) => {
+      return cricketPageData.settings.section.find(section => section.type === type);
+    }
 
   return (
     <>
-      <Navbar />
+      <Navbar data={getNavData('setting')} />
       <SportsHero data={getSectionData('hero_cricket')}/>
       <Leagues data={getSectionData('data_coverage_cricket')}/>
       <DataCoverage  data={getSectionData('data_coverage_cricket')}/>
       <Endpoints data={getSectionData('developer_cricket')}/>
-      <Pricing data={getSectionData('pricing')}/>
-      <InsightsNews data={getSectionData('blogs')}/>
+      <Pricing data={cricketPageData}/>
+      {/* <InsightsNews data={getSectionData('blogs')}/> */}
+      <Blogs data={cricketPageData} />
       <Footer />
     </>
   )

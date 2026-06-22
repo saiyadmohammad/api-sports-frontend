@@ -3,7 +3,6 @@ import { Check, Search } from 'lucide-react'
 import Image from 'next/image'
 
 export default function DataCoverage({data}) {  
-  console.log('hi')
   const { heading, title, subtitle, all_features } = data.section_data;
   const columns = ['live', 'fixtures', 'results', 'standings', 'players', 'teams'];
 

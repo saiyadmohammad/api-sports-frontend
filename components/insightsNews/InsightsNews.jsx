@@ -3,7 +3,8 @@ import Image from 'next/image'
 
 export default function InsightsNews({data}) {
   const { heading, title, subtitle, blogs} = data.section_data;
-  console.log(data);
+
+  // console.log(data)
 
   return (
     <section className='section-space'>

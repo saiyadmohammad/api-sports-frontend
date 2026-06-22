@@ -27,7 +27,7 @@ export default function Navbar({data}) {
       <nav className="py-5 container-width">
         <div className="flex items-center justify-between relative">
           <a href="/">
-            <Image className="" src={data.logo} width={40} height={40} alt="Logo" unoptimized/>
+            <Image className="" src={data.section_data.nav_logo} width={40} height={40} alt="Logo" unoptimized/>
           </a>
 
           <div>

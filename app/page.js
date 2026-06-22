@@ -9,21 +9,23 @@ import Features from "@/components/featuresSection/Features";
 import Widgets from "@/components/widgets/Widgets";
 import Cta from "@/components/cta/Cta";
 import Footer from "@/components/Footer";
-import { getHomePageData, getSettingsData } from "@/lib/api/home";
+import { getHomePageData } from "@/lib/api/api";
 
 export default async function Home() {
 
   let homePageData  = await getHomePageData();
-  let settingsData = await getSettingsData();
 
   const getSectionData = (type) => {
-    return homePageData.find(section => section.type === type);
+    return homePageData.page.section.find(section => section.type === type);
   }
 
+  const getNavData = (type) => {
+    return homePageData.settings.section.find(section => section.type === type);
+  }
 
   return (
     <>
-      <Navbar data={settingsData}/>
+      <Navbar data={getNavData('setting')}/>
 
       {/* Hero Section */}
       <Hero data={getSectionData('hero_home')} />
@@ -47,7 +49,7 @@ export default async function Home() {
       <WhyChoose data={getSectionData('why_choose')} />
 
       {/* Blog Section */}
-      <Blogs data={getSectionData('blogs')} />
+      <Blogs data={homePageData} />
 
       {/* Call to action  */}
       <Cta data={getSectionData('cta_section')} />

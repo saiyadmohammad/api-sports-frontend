@@ -3,7 +3,7 @@ import { Check } from 'lucide-react'
 import React from 'react'
 
 export default function Pricing({ data }) {
-  const {heading, title, subtitle, pricing_plans } = data.section_data;
+  const {heading, title, subtitle} = data.page.section.find(section => section.type === 'pricing').section_data;
 
   return (
     <section className='section-space'>
@@ -18,18 +18,18 @@ export default function Pricing({ data }) {
         </div>
 
         <div className={`flex gap-10 flex-col md:flex-row`}>
-          {pricing_plans.map((item) => (
+          {data.pricings.map((item) => (
             <div key={item.id} className='flex flex-col gap-4 border border-gray-200 gradient-border shadow-sm px-8 py-6 rounded-xl'>
               <div>
                 <h3 className='mb-1'>{item.name}</h3>
-                <p>{item.description}</p>
+                <p>{item.tag}</p>
               </div>
               <div className='flex gap-2 items-end'>
                 <div className='flex items-start gap-1'>
                   <div className='font-bold text-lg'>{item.currency}</div>
                   <div className='text-3xl font-bold'>{item.price}</div>
                 </div>
-                <div className=''>{item.billing}</div>
+                <div className=''>/{item.duration}</div>
               </div>
               <div className='flex flex-col gap-2'>
                 {item.features.map((feature) => (
@@ -39,7 +39,7 @@ export default function Pricing({ data }) {
                 ))}
               </div>
 
-              <a className='gradient-button'>{item.buttonText}</a>
+              <a className='gradient-button'>{item.button_text}</a>
             </div>
           ))}
         </div>

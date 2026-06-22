@@ -1,24 +1,27 @@
 import { blogsData } from '@/lib/data'
 import { MoveRight } from 'lucide-react'
 import BlogsCard from './BlogsCard'
+import Link from 'next/link';
 
 export default function Blogs({data}) {
-  const {heading, title, blogs} = data.section_data;
+  const {heading, title, subtitle, blogs} = data.page.section.find(section => section.type === 'blogs').section_data;
+  // console.log(data.blogs);
+  // console.log(blogs)
 
   return (
-    <section className="section-space">
-      <div className="container-width flex flex-col  gap-8">
-        <div className="flex justify-between items-end">
-          <div>
-            <div className="text-sm font-bold gradient-text uppercase tracking-wider mb-2">{heading}</div>
+    <section className='section-space'>
+      <div className='container-width flex gap-10 lg:flex-row flex-col'>
+        <div className='flex-2 flex flex-col gap-4'>
+          <div className='flex flex-col gap-5'>
+            <span className='primary-color font-medium'>{heading}</span>
             <h2>{title}</h2>
+            <p className='max-w-2xl'>{subtitle}</p>
+            <Link href='blogs' className='gradient-button w-64'>View all articles →</Link>
           </div>
-
-          <a href="#" className="text-sm font-bold gradient-text tracking-wider">View all Blogs <MoveRight size={20} className="inline-block ml-2 text-pink-400" /></a>
         </div>
-        
-        <div className="flex gap-4 flex-col lg:flex-row">
-          <BlogsCard blogsData={blogs} />
+  
+        <div className='flex-5 flex flex-col md:flex-row gap-4'>
+          <BlogsCard blogsData={data.blogs} />
         </div>
       </div>
     </section>
