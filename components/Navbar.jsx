@@ -7,9 +7,16 @@ import { FaBars } from "react-icons/fa";
 import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation'
 import Link from "next/link";
+import AuthModal from "./auth/AuthModal";
+import LoginForm from "./auth/LoginForm";
+import SignupForm from "./auth/SignupForm";
 
 export default function Navbar({data}) {
   const [isOpen, setIsOpen]  = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [user, setUser] = useState(false);
+  const [logout, setLogout] = useState(true);
+  const [authMode, setAuthMode] = useState("login");
   const testRef = useRef(null);
   const pathName = usePathname();
 
@@ -36,12 +43,31 @@ export default function Navbar({data}) {
           </div>
 
           {/* desktop menu  */}
-          <ul className="hidden font-medium lg:flex space-x-2"> 
+          <ul className="hidden font-medium lg:flex lg:items-center space-x-2"> 
             {menuItems.map((menu) => (
               <li key={menu.id}>
-                <Link href={menu.href} className={`${menu.href === pathName ? "bg-gray-200" : ""} rounded-lg px-5 py-3 cursor-pointer text-black/90 text-lg`} >{menu.name}</Link>
+                <Link href={menu.href} className={`${menu.href === pathName ? "gradient-text" : ""} rounded-lg px-5 py-3 cursor-pointer text-black/90 text-lg`} >{menu.name}</Link>
               </li> 
-            ))} 
+            ))}
+
+            {user ? (
+              <button
+                onClick={logout}
+                className="gradient-button"
+              >
+                Logout
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  setAuthMode("login");
+                  setShowModal(true);
+                }}
+                className="gradient-button"
+              >
+                Login
+              </button>
+            )} 
           </ul>
         </div>
       </nav>
@@ -56,6 +82,16 @@ export default function Navbar({data}) {
           ))} 
         </ul>
       </div>
+
+      {showModal && (
+        <AuthModal onClose={() => setShowModal(false)} >
+          {authMode === "login" ? (
+            <LoginForm closeModal={() => setShowModal(false)} switchToSignup={() => setAuthMode("signup")}/>
+          ) : (
+            <SignupForm closeModal={() => setShowModal(false)} switchToLogin={() => setAuthMode("login")}/>
+          )}
+        </AuthModal>
+      )}
     </header>
   );
 }
