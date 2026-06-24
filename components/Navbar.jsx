@@ -10,27 +10,78 @@ import Link from "next/link";
 import AuthModal from "./auth/AuthModal";
 import LoginForm from "./auth/LoginForm";
 import SignupForm from "./auth/SignupForm";
+import { useFirebaseAuth } from "@/context/FirebaseAuthContext";
+import { setCookie, getCookie, deleteCookie } from "cookies-next";
+
 
 export default function Navbar({data}) {
+  const { user, logout, loading } = useFirebaseAuth();
   const [isOpen, setIsOpen]  = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [user, setUser] = useState(false);
-  const [logout, setLogout] = useState(true);
+  const [userBackend, setUserBackend] = useState(false);
   const [authMode, setAuthMode] = useState("login");
-  const testRef = useRef(null);
+  const pageRef = useRef(null);
   const pathName = usePathname();
+  const token = getCookie("user_token");
+
+  console.log(user)
 
   useEffect(() => {
     function handleClick(event){
-      if (testRef.current && !testRef.current.contains(event.target)) {
+      if (pageRef.current && !pageRef.current.contains(event.target)) {
         setIsOpen(false);
       }
     }
     document.addEventListener('mousedown', handleClick);
   }, []);
+  
+
+  useEffect(() => {
+    if(token){
+      fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/user`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/json',
+        },
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        if(data){
+          setUserBackend(data)
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    }
+  }, []);
+
+
+  const handleLogout = () => {
+      logout();
+      fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/logout`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          deleteCookie("user_token", { path: "/" });
+          setUserBackend("");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+
+
 
   return (
-    <header className="w-full bg-white sticky top-0 z-10" ref={testRef}>
+    <header className="w-full bg-white sticky top-0 z-10" ref={pageRef}>
       <nav className="py-5 container-width">
         <div className="flex items-center justify-between relative">
           <a href="/">
@@ -50,12 +101,12 @@ export default function Navbar({data}) {
               </li> 
             ))}
 
-            {user ? (
+            {(userBackend || user) ? (
               <button
-                onClick={logout}
+                onClick={handleLogout}
                 className="gradient-button"
               >
-                Logout
+                Logout {userBackend.name}
               </button>
             ) : (
               <button
@@ -74,21 +125,40 @@ export default function Navbar({data}) {
 
       {/* mobile menu  */}
       <div className={`transition-all duration-300 overflow-hidden bg-gray-100 rounded-xs shadow-sm border border-gray-100 ${isOpen? "max-h-96 border-t": "max-h-0"}`}>
-        <ul className="p-10 font-medium lg:hidden flex flex-col gap-4"> 
+        <ul className="p-10 font-medium lg:hidden flex flex-col gap-4 max-w-70"> 
           {menuItems.map((menu) => (
             <li className={`${menu.href === pathName ? "bg-gray-200" : ""} py-2 rounded-lg`} key={menu.name}>
               <Link href={menu.href} className={` px-5 text-black/90 text-lg`}>{menu.name}</Link>
             </li>
           ))} 
+
+          {(userBackend || user) ? (
+              <button
+                onClick={handleLogout}
+                className="gradient-button"
+              >
+                Logout {userBackend.name}
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  setAuthMode("login");
+                  setShowModal(true);
+                }}
+                className="gradient-button"
+              >
+                Login
+              </button>
+            )}
         </ul>
       </div>
 
       {showModal && (
         <AuthModal onClose={() => setShowModal(false)} >
           {authMode === "login" ? (
-            <LoginForm closeModal={() => setShowModal(false)} switchToSignup={() => setAuthMode("signup")}/>
+            <LoginForm closeModal={() => setShowModal(false)} switchToSignup={() => setAuthMode("signup")} setUserBackend={setUserBackend} user={user}/>
           ) : (
-            <SignupForm closeModal={() => setShowModal(false)} switchToLogin={() => setAuthMode("login")}/>
+            <SignupForm closeModal={() => setShowModal(false)} switchToLogin={() => setAuthMode("login")} setUserBackend={setUserBackend}/>
           )}
         </AuthModal>
       )}

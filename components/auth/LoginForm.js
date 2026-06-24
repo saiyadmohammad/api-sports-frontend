@@ -1,36 +1,58 @@
 "use client";
 import { useState } from "react";
+import { auth } from "@/lib/firebase";
+import { setCookie, getCookie } from "cookies-next";
+import { useFirebaseAuth } from "@/context/FirebaseAuthContext";
 
-export default function LoginForm({ switchToSignup, closeModal }) {
+import { GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, getAuth } from "firebase/auth";
+
+export default function LoginForm({ switchToSignup, closeModal, setUserBackend, user }) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  // const { user} = useFirebaseAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({email, password }),
+      });
+
+      const data = await res.json();
+      setCookie("user_token", data.token);
+      setUserBackend(data.user)
       closeModal();
+
     } catch (err) {
       setError(err.message);
     }
   };
 
   const handleGoogleLogin = async () => {
-    // try {
-    //   setError("");
-    //   const provider = new GoogleAuthProvider();
-    //   await signInWithRedirect(auth, provider);
-    // } catch (err) {
-    //   console.log(err);
-    //   setError(err.message);
-    // }
+    try {
+      setError("");
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+
+      console.log(auth);
+      closeModal();
+    } catch (err) {
+      console.log(err);
+      setError(err.message);
+    }
+
+
   };
 
   return (
     <div>
-
       <h2 className="text-3xl font-bold mb-6">
         Login
       </h2>

@@ -1,17 +1,32 @@
 import { useState } from "react";
+import { setCookie, getCookie } from "cookies-next";
 
-export default function SignupForm({
-  switchToLogin,
-  closeModal,
-}) {
-  const [email, setEmail] = useState("");
+export default function SignupForm({ switchToLogin, closeModal, setUserBackend}) {
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+
   const handleSignup = async (e) => {
     e.preventDefault();
-    
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({name, email, password }),
+      });
+
+      const data = await res.json();
+      setCookie("user_token", data.token);
+      setUserBackend(data.user)
+      closeModal();
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -63,9 +78,9 @@ export default function SignupForm({
       </form>
 
       {error && (
-        <p className="text-red-500 mt-4">
+        <div className="text-red-500 mt-4">
           {error}
-        </p>
+        </div>
       )}
 
       <p className="mt-6 text-center">
