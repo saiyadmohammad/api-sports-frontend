@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono, Inter, Space_Grotesk  } from "next/font/google";
 import { AuthProvider } from '@/context/FirebaseAuthContext';
 import "./globals.css";
+import {UserProvider} from "@/context/UserContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +36,9 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col">
         <AuthProvider>
-          {children}
+          <UserProvider>
+            {children}
+          </UserProvider>
         </AuthProvider>
       </body>
     </html>

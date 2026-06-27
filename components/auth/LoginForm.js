@@ -5,6 +5,7 @@ import { setCookie, getCookie } from "cookies-next";
 import { useFirebaseAuth } from "@/context/FirebaseAuthContext";
 
 import { GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, getAuth } from "firebase/auth";
+import Image from "next/image";
 
 export default function LoginForm({ switchToSignup, closeModal, setUserBackend, user }) {
 
@@ -25,9 +26,11 @@ export default function LoginForm({ switchToSignup, closeModal, setUserBackend, 
         body: JSON.stringify({email, password }),
       });
 
-      const data = await res.json();
-      setCookie("user_token", data.token);
-      setUserBackend(data.user)
+      const resData = await res.json();
+      console.log(resData);
+
+      setCookie("user_token", resData.data.token);
+      setUserBackend(resData.data.user)
       closeModal();
 
     } catch (err) {
@@ -37,18 +40,29 @@ export default function LoginForm({ switchToSignup, closeModal, setUserBackend, 
 
   const handleGoogleLogin = async () => {
     try {
-      setError("");
+      // setError("");
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
 
-      console.log(auth);
+      // console.log(auth.currentUser.accessToken);
+
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/loginwithgoogle`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({"token" : auth.currentUser.accessToken}),
+      });
+
+      const resData = await res.json();
+      setCookie("user_token", resData.data.token);
+      setUserBackend(resData.data.user)
       closeModal();
     } catch (err) {
       console.log(err);
       setError(err.message);
     }
-
-
   };
 
   return (
@@ -94,6 +108,7 @@ export default function LoginForm({ switchToSignup, closeModal, setUserBackend, 
           onClick={handleGoogleLogin}
           className="w-full rounded outline-button py-3"
         >
+          <Image className="mr-1" src="/assets/img/google-logo.png" width={40} height={40} alt="google image"/>
           Sign In with Google
         </button>
 

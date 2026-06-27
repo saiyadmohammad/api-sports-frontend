@@ -20,9 +20,9 @@ export default function SignupForm({ switchToLogin, closeModal, setUserBackend})
         body: JSON.stringify({name, email, password }),
       });
 
-      const data = await res.json();
-      setCookie("user_token", data.token);
-      setUserBackend(data.user)
+      const resData = await res.json();
+      setCookie("user_token", resData.data.token);
+      setUserBackend(resData.data.user)
       closeModal();
     } catch (err) {
       setError(err.message);

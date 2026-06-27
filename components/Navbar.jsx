@@ -2,7 +2,7 @@
 import { menuItems } from "@/lib/data";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation'
@@ -12,77 +12,90 @@ import LoginForm from "./auth/LoginForm";
 import SignupForm from "./auth/SignupForm";
 import { useFirebaseAuth } from "@/context/FirebaseAuthContext";
 import { setCookie, getCookie, deleteCookie } from "cookies-next";
+import UserDetails from "./auth/UserDetails";
+import { UserContext, UserProvider, useUserContext } from "@/context/UserContext";
 
 
 export default function Navbar({data}) {
-  const { user, logout, loading } = useFirebaseAuth();
+  const { logout, loading } = useFirebaseAuth();
   const [isOpen, setIsOpen]  = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [userBackend, setUserBackend] = useState(false);
+  const [showUserModal, setShowUserModal] = useState(false);
+  const [userBackend, setUserBackend] = useState(null);
   const [authMode, setAuthMode] = useState("login");
   const pageRef = useRef(null);
   const pathName = usePathname();
   const token = getCookie("user_token");
 
-  console.log(user)
+  let user = useContext(UserContext);
+
+  // console.log(values)
+  // console.log('nav-bar')
 
   useEffect(() => {
     function handleClick(event){
       if (pageRef.current && !pageRef.current.contains(event.target)) {
+        setShowUserModal(false);
         setIsOpen(false);
       }
     }
     document.addEventListener('mousedown', handleClick);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClick);
+    };
   }, []);
   
 
   useEffect(() => {
-    if(token){
-      fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/user`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Accept': 'application/json',
-        },
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        if(data){
-          setUserBackend(data)
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-    }
-  }, []);
-
+    setUserBackend(user);
+    // console.log('useeffect')
+    // if(token){
+    //   fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/user`, {
+    //     method: 'GET',
+    //     headers: {
+    //       'Authorization': `Bearer ${token}`,
+    //       'Accept': 'application/json',
+    //       next: { revalidate: false }
+    //     },
+    //   })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     if(data){
+    //       setUserBackend(data)
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
+    // }
+  }, [user]);
+  
 
   const handleLogout = () => {
-      logout();
-      fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/logout`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-        })
-        .then((response) => response.json())
-        .then((data) => {
-          deleteCookie("user_token", { path: "/" });
-          setUserBackend("");
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-
-
+    logout();
+    fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/logout`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      deleteCookie("user_token", { path: "/" });
+      setUserBackend(null);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
 
   return (
     <header className="w-full bg-white sticky top-0 z-10" ref={pageRef}>
       <nav className="py-5 container-width">
+        {/* {token && <h2>Login</h2>} */}
         <div className="flex items-center justify-between relative">
           <a href="/">
             <Image className="" src={data.section_data.nav_logo} width={40} height={40} alt="Logo" unoptimized/>
@@ -101,20 +114,30 @@ export default function Navbar({data}) {
               </li> 
             ))}
 
-            {(userBackend || user) ? (
-              <button
-                onClick={handleLogout}
-                className="gradient-button"
-              >
-                Logout {userBackend.name}
-              </button>
+            {token ? (
+              <div>
+                <div className="w-22 flex justify-center">
+                  <Image onClick={() => setShowUserModal(prev => !prev)} className="cursor-pointer" src="/assets/img/user.png" width={35} height={35} alt="Logo" unoptimized/>
+                </div>
+
+                {showUserModal && (
+                  <UserDetails user={userBackend} handleLogout={handleLogout} />
+                )}
+
+                {/* <button
+                  onClick={handleLogout}
+                  className="gradient-button"
+                >
+                  Logout {userBackend.name}
+                </button> */}
+              </div>
             ) : (
               <button
                 onClick={() => {
                   setAuthMode("login");
                   setShowModal(true);
                 }}
-                className="gradient-button"
+                className="gradient-button w-22"
               >
                 Login
               </button>
@@ -132,12 +155,12 @@ export default function Navbar({data}) {
             </li>
           ))} 
 
-          {(userBackend || user) ? (
-              <button
-                onClick={handleLogout}
-                className="gradient-button"
-              >
-                Logout {userBackend.name}
+          {(userBackend) ? (
+            <button
+            onClick={handleLogout}
+            className="gradient-button"
+            >
+                Logout
               </button>
             ) : (
               <button
@@ -156,7 +179,7 @@ export default function Navbar({data}) {
       {showModal && (
         <AuthModal onClose={() => setShowModal(false)} >
           {authMode === "login" ? (
-            <LoginForm closeModal={() => setShowModal(false)} switchToSignup={() => setAuthMode("signup")} setUserBackend={setUserBackend} user={user}/>
+            <LoginForm closeModal={() => setShowModal(false)} switchToSignup={() => setAuthMode("signup")} setUserBackend={setUserBackend}/>
           ) : (
             <SignupForm closeModal={() => setShowModal(false)} switchToLogin={() => setAuthMode("login")} setUserBackend={setUserBackend}/>
           )}
