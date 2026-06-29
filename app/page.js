@@ -26,34 +26,34 @@ export default async function Home() {
   return (
     <>
       <Navbar data={getNavData('setting')}/>
+      <main>
+        {/* Hero Section */}
+        <Hero data={getSectionData('hero_home')} />
 
-      {/* Hero Section */}
-      <Hero data={getSectionData('hero_home')} />
+        {/* Features Section */}
+        <Features data={getSectionData('feature')} />
 
-      {/* Features Section */}
-      <Features data={getSectionData('feature')} />
+        {/* Widgets Section */}
+        <Widgets data={getSectionData('widget')} />
 
-      {/* Widgets Section */}
-      <Widgets data={getSectionData('widget')} />
+        {/* All Sports Section */}
+        {/* <AllSports data={getSectionData('sports')} /> */}
 
-      {/* All Sports Section */}
-      <AllSports data={getSectionData('sports')} />
+        {/* Developers Section */}
+        <Developers data={getSectionData('developer_home')} />
 
-      {/* Developers Section */}
-      <Developers data={getSectionData('developer_home')} />
+        {/* Seamless integrations Section */}
+        <SeamlessIntegration data={getSectionData('seamless_integrations')} />
 
-      {/* Seamless integrations Section */}
-      <SeamlessIntegration data={getSectionData('seamless_integrations')} />
+        {/* Why Developer Choose Section */}
+        <WhyChoose data={getSectionData('why_choose')} />
 
-      {/* Why Developer Choose Section */}
-      <WhyChoose data={getSectionData('why_choose')} />
+        {/* Blog Section */}
+        <Blogs data={homePageData} />
 
-      {/* Blog Section */}
-      <Blogs data={homePageData} />
-
-      {/* Call to action  */}
-      <Cta data={getSectionData('cta_section')} />
-
+        {/* Call to action  */}
+        <Cta data={getSectionData('cta_section')} />
+      </main>
       <Footer />
     </>
   );

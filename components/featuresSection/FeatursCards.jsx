@@ -1,6 +1,6 @@
 export default function FeaturesCards ({ featuresData, iconMap }) {
   return (
-    <div className="grid gap-4 md:grid-cols-3 flex-2">
+    <div className="grid gap-4 md:grid-cols-3 flex-2" data-aos="fade-up">
       {featuresData.map((feature) => {
         const Icon = iconMap[feature.icon];
         return (

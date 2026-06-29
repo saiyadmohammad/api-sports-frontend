@@ -5,7 +5,7 @@ export default function Cta({data}) {
 
   return (
     <section className="section-space">
-      <div className="container-width">
+      <div className="container-width" data-aos="fade-left">
 
         <div className="flex flex-col md:items-center items-start md:flex-row gap-10 lg:gap-10 justify-evenly p-10 gradient-bg rounded-2xl">
           <div className='flex flex-col gap-1'>

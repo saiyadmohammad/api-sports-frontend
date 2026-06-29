@@ -24,13 +24,15 @@ export default async function football() {
   return (
     <>
       <Navbar data={getNavData('setting')}/>
-      <SportsHero data={getSectionData('hero_football')}/>
-      <Leagues data={getSectionData('data_coverage_football')}/>
-      <DataCoverage data={getSectionData('data_coverage_football')}/>
-      <Endpoints data={getSectionData('developer_football')}/>
-      <Pricing data={footBallPageData}/>
-      {/* <InsightsNews data={getSectionData('blogs')}/> */}
-      <Blogs data={footBallPageData} />
+      <main>
+        <SportsHero data={getSectionData('hero_football')}/>
+        <Leagues data={getSectionData('data_coverage_football')}/>
+        <DataCoverage data={getSectionData('data_coverage_football')}/>
+        <Endpoints data={getSectionData('developer_football')}/>
+        <Pricing data={footBallPageData}/>
+        {/* <InsightsNews data={getSectionData('blogs')}/> */}
+        <Blogs data={footBallPageData} />
+      </main>
       <Footer />
     </>
   )

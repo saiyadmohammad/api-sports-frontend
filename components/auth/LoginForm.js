@@ -27,7 +27,7 @@ export default function LoginForm({ switchToSignup, closeModal, setUserBackend, 
       });
 
       const resData = await res.json();
-      console.log(resData);
+      // console.log(resData);
 
       setCookie("user_token", resData.data.token);
       setUserBackend(resData.data.user)
@@ -41,10 +41,18 @@ export default function LoginForm({ switchToSignup, closeModal, setUserBackend, 
   const handleGoogleLogin = async () => {
     try {
       // setError("");
+      console.log(1);
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      console.log(2);
+      await signInWithRedirect(auth, provider);
+      console.log(3);
+      
+      // const auths = getAuth();
+      // console.log(4);
 
-      // console.log(auth.currentUser.accessToken);
+      // const test = await getRedirectResult(auths);
+
+      // console.log(test);
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/loginwithgoogle`, {
         method: 'POST',

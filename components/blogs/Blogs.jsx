@@ -10,7 +10,7 @@ export default function Blogs({data}) {
 
   return (
     <section className='section-space'>
-      <div className='container-width flex gap-10 lg:flex-row flex-col'>
+      <div className='container-width flex gap-10 lg:flex-row flex-col' data-aos="fade-up">
         <div className='flex-2 flex flex-col gap-4'>
           <div className='flex flex-col gap-5'>
             <span className='primary-color font-medium'>{heading}</span>
@@ -20,7 +20,7 @@ export default function Blogs({data}) {
           </div>
         </div>
   
-        <div className='flex-5 flex flex-col md:flex-row gap-4'>
+        <div className='flex-5 flex flex-col md:flex-row gap-4' data-aos="fade-left">
           <BlogsCard blogsData={data.blogs} />
         </div>
       </div>

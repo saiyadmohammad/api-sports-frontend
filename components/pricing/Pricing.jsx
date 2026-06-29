@@ -17,7 +17,7 @@ export default function Pricing({ data }) {
           </div>
         </div>
 
-        <div className={`flex gap-10 flex-col md:flex-row`}>
+        <div className={`flex gap-10 flex-col md:flex-row`} data-aos="fade-up">
           {data.pricings.map((item) => (
             <div key={item.id} className='flex flex-col gap-4 border border-gray-200 gradient-border shadow-sm px-8 py-6 rounded-xl'>
               <div>

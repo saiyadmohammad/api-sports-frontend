@@ -6,7 +6,7 @@ export default function SeamlessIntegration({data}) {
   const {hading, title, subtitle, tech_icons} = data.section_data;
 
   return (
-    <section className="section-space">
+    <section className="section-space" data-aos="fade-up">
       <div className="container-width flex flex-col lg:flex-row gap-8">
         <div className="flex-1">
           <div className="text-sm font-bold gradient-text uppercase tracking-wider mb-2">{hading}</div>

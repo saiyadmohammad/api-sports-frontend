@@ -8,7 +8,7 @@ export default function DataCoverage({data}) {
 
   return (
     <section className='section-space'>
-      <div className='container-width flex gap-10 lg:flex-row flex-col'>
+      <div className='container-width flex gap-10 lg:flex-row flex-col' data-aos="fade-up">
         <div className='flex-2 flex flex-col gap-6'>
           <div className='flex flex-col gap-5'>
             <span className='primary-color font-medium'>{ heading }</span>

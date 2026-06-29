@@ -1,6 +1,6 @@
 "use client"
 import { menuItems } from "@/lib/data";
-import { Menu, X } from "lucide-react";
+import { Loader, Menu, X } from "lucide-react";
 import Image from "next/image";
 import { useContext, useState } from "react";
 import { FaBars } from "react-icons/fa";
@@ -14,10 +14,12 @@ import { useFirebaseAuth } from "@/context/FirebaseAuthContext";
 import { setCookie, getCookie, deleteCookie } from "cookies-next";
 import UserDetails from "./auth/UserDetails";
 import { UserContext, UserProvider, useUserContext } from "@/context/UserContext";
+import { GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, getAuth } from "firebase/auth";
+
 
 
 export default function Navbar({data}) {
-  const { logout, loading } = useFirebaseAuth();
+  const {logout, loading} = useFirebaseAuth();
   const [isOpen, setIsOpen]  = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showUserModal, setShowUserModal] = useState(false);
@@ -27,10 +29,17 @@ export default function Navbar({data}) {
   const pathName = usePathname();
   const token = getCookie("user_token");
 
-  let user = useContext(UserContext);
+
+  let {user, isInitialized} = useContext(UserContext);
 
   // console.log(values)
-  // console.log('nav-bar')
+  // console.log('nav-bar' , isInitialized)
+  const [isClient, setIsClient] = useState(false);
+
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     function handleClick(event){
@@ -107,41 +116,44 @@ export default function Navbar({data}) {
           </div>
 
           {/* desktop menu  */}
-          <ul className="hidden font-medium lg:flex lg:items-center space-x-2"> 
+          <ul className="hidden font-medium lg:flex lg:items-center space-x-2" > 
             {menuItems.map((menu) => (
               <li key={menu.id}>
                 <Link href={menu.href} className={`${menu.href === pathName ? "gradient-text" : ""} rounded-lg px-5 py-3 cursor-pointer text-black/90 text-lg`} >{menu.name}</Link>
               </li> 
             ))}
-
-            {token ? (
+            
+            { isInitialized && 
               <div>
-                <div className="w-22 flex justify-center">
-                  <Image onClick={() => setShowUserModal(prev => !prev)} className="cursor-pointer" src="/assets/img/user.png" width={35} height={35} alt="Logo" unoptimized/>
-                </div>
+                {token  ? (
+                  <div>
+                    <div className="w-22 flex justify-center">
+                      <Image onClick={() => setShowUserModal(prev => !prev)} className="cursor-pointer" src="/assets/img/user.png" width={35} height={35} alt="Logo" unoptimized/>
+                    </div>
 
-                {showUserModal && (
-                  <UserDetails user={userBackend} handleLogout={handleLogout} />
-                )}
-
-                {/* <button
-                  onClick={handleLogout}
-                  className="gradient-button"
-                >
-                  Logout {userBackend.name}
-                </button> */}
+                    {showUserModal && (
+                      <UserDetails user={userBackend} handleLogout={handleLogout} />
+                    )}
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => {
+                      setAuthMode("login");
+                      setShowModal(true);
+                    }}
+                    className="gradient-button w-22"
+                  >
+                    Login
+                  </button>
+                )} 
               </div>
-            ) : (
-              <button
-                onClick={() => {
-                  setAuthMode("login");
-                  setShowModal(true);
-                }}
-                className="gradient-button w-22"
-              >
-                Login
-              </button>
-            )} 
+            }
+
+            {!isInitialized && 
+              <div className="w-22 flex justify-center">
+                <Loader />
+              </div>
+            }
           </ul>
         </div>
       </nav>

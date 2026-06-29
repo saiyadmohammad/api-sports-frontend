@@ -5,7 +5,7 @@ export default function WhyChoose({data}) {
   
   return (
     <section className="section-space">
-      <div className="container-width lg:px-24">
+      <div className="container-width lg:px-24" data-aos="fade-up">
         <div className="mb-6 text-center uppercase font-medium gradient-text">{heading}</div>
 
         <div className="flex flex-col lg:flex-row gap-6">

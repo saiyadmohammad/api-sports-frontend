@@ -7,7 +7,7 @@ export default function Hero({ data }) {
   return (
       <section className="section-space bg-gray-50">
         <div className="container-width flex flex-col items-center gap-8 lg:flex-row ">
-          <div className="flex gap-6 flex-col items-start">
+          <div className="flex gap-6 flex-col items-start" data-aos="fade-right">
             <div className="flex items-center text-xs font-medium text-gray-500 border-2 border-gray-300 px-4 py-2 rounded-full"> <Zap size={16} className="mr-2"/> {heading}</div>
             <h1 className=" mb-4">{title_first} <br/> <span className="gradient-text">{title_second} </span></h1>
             <p className="text-lg text-gray-700 mb-6">
@@ -20,7 +20,7 @@ export default function Hero({ data }) {
             </div>
           </div>
           
-          <div className="relative  aspect-5/3 w-full">
+          <div className="relative  aspect-5/3 w-full"  data-aos="zoom-in">
             <Image
               src={image}
               alt="Sports API Hero Image"

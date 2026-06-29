@@ -7,7 +7,7 @@ export default function Leagues({data}) {
 
   return (
     <section className="section-space bg-gray-50">
-      <div className="container-width">
+      <div className="container-width" data-aos="fade-up">
         <LeaguesCard data={all_features} />
       </div>
     </section>

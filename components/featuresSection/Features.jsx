@@ -7,7 +7,7 @@ export default function Features({ data }) {
 
   return (
     <section className="section-space">
-      <div className="container-width flex flex-col lg:flex-row gap-8">
+      <div className="container-width flex flex-col lg:flex-row gap-8" data-aos="fade-up">
         <div className="flex-1">
           <div className="text-sm font-bold gradient-text uppercase tracking-wider mb-2">{heading}</div>
           <h2 className="mb-4">{title}</h2>
