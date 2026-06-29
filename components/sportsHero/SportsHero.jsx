@@ -31,7 +31,7 @@ export default function SportsHero({data}) {
       <div className="container-width grid lg:grid-cols-2 items-center gap-8">
         <div className="flex gap-6 flex-col items-start" data-aos="fade-right" ref={ref}>
           {/* <div className="flex items-center text-xs font-medium text-gray-500 border-2 border-gray-300 px-4 py-2 rounded-full"> <Zap size={16} className="mr-2"/>{heading}</div> */}
-          <h1 className=" mb-4"> {title_first} <span className="gradient-text"> {title_middle} </span> {title_last} </h1>
+          <h1 className="mb-4"> {title_first} <span className="gradient-text"> {title_middle} </span> {title_last} </h1>
           <p className="text-lg text-gray-700 mb-6">
             {subtitle}
           </p>

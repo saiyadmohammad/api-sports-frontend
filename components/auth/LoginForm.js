@@ -41,11 +41,9 @@ export default function LoginForm({ switchToSignup, closeModal, setUserBackend, 
   const handleGoogleLogin = async () => {
     try {
       // setError("");
-      console.log(1);
       const provider = new GoogleAuthProvider();
       console.log(2);
       await signInWithRedirect(auth, provider);
-      console.log(3);
       
       // const auths = getAuth();
       // console.log(4);
@@ -54,19 +52,19 @@ export default function LoginForm({ switchToSignup, closeModal, setUserBackend, 
 
       // console.log(test);
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/loginwithgoogle`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify({"token" : auth.currentUser.accessToken}),
-      });
+      // const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/loginwithgoogle`, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     'Accept': 'application/json',
+      //   },
+      //   body: JSON.stringify({"token" : auth.currentUser.accessToken}),
+      // });
 
-      const resData = await res.json();
-      setCookie("user_token", resData.data.token);
-      setUserBackend(resData.data.user)
-      closeModal();
+      // const resData = await res.json();
+      // setCookie("user_token", resData.data.token);
+      // setUserBackend(resData.data.user)
+      // closeModal();
     } catch (err) {
       console.log(err);
       setError(err.message);

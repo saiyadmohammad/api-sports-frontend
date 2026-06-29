@@ -2,7 +2,7 @@ import CountUp from 'react-countup';
 
 export default function StatesCard({footballHeroData, footballHeroIconMap}) {
   return (
-    <div className="flex gap-4 mt-10">
+    <div className="flex flex-wrap gap-4 mt-10">
       {footballHeroData.map((item) => {
         const Icon = footballHeroIconMap[item.icon];
         let numInStr = ""; let str = "";
