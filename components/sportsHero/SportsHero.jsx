@@ -44,7 +44,7 @@ export default function SportsHero({data}) {
         </div>
         
         <div className="flex items-center justify-center" data-aos="zoom-in">
-          <Image className="w-full" src={image} height={700} width={700} alt="sports-img" unoptimized/>
+          <Image className="max-w-80 sm:max-w-140 lg:max-w-160" src={image} height={700} width={700} alt="sports-img" unoptimized/>
         </div>
       </div>
     </section>

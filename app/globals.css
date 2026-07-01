@@ -51,26 +51,26 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: clamp(3rem, 8vw, 5rem);
+  font-size: clamp(2.8rem, 8vw, 5rem);
   line-height: 0.95;
   font-weight: 700;
 }
 
 h2 {
-  font-size: clamp(2rem, 5vw, 2.4rem);
+  font-size: clamp(1.6rem, 5vw, 2.5rem);
   line-height: 1.1;
   font-weight: 700;
 }
 
 h3 {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 5vw, 1.4rem);;
   line-height: 1.2;
   font-weight: 600;
 }
 
 p, li {
   font-family: var(--font-inter);
-  font-size: 1rem;
+  font-size: clamp(.8rem, 5vw, 1rem);;
   line-height: 1.6;
   color: var(--body);
 }
@@ -127,6 +127,7 @@ p, li {
   .gradient-button {
     @apply inline-flex items-center justify-center rounded-full
     px-5 py-2 text-white cursor-pointer transition-all duration-300;
+    font-size: clamp(.8rem, 3.6vw, 1.2rem);
 
     background: var(--primary-gradient);
   }
@@ -139,6 +140,7 @@ p, li {
   .outline-button {
     @apply inline-flex items-center justify-center rounded-full
     px-5 py-2 cursor-pointer transition-all duration-300;
+    font-size: clamp(.8rem, 3.6vw, 1.2rem);
 
     background: white;
     border: 1px solid var(--border);
@@ -152,6 +154,24 @@ p, li {
 
   .gradient-border {
     border: 1px solid linear-gradient(135deg, #ff4d8d 0%, #ff8a3d 100%);
+  }
+
+
+  pre {
+    overflow-x: auto; 
+    white-space: pre; 
+    word-break: normal;
+    word-spacing: normal;
+    word-wrap: normal;
+  }
+
+  pre::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  pre::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 0.4);
+    border-radius: 4px;
   }
 
   /* CARD */

@@ -38,7 +38,7 @@ export default async function Blog({params}) {
               <p className=''>{formattedDate}</p>
               {/* <p className=''>{formattedDate}</p> */}
             </div>
-            <Image className='h-90 w-full object-cover rounded-lg' src={blog.image} alt={blog.title} height={200} width={200} unoptimized/>
+            <Image className='h-50 sm:h-70 md:h-90 w-full object-cover rounded-lg' src={blog.image} alt={blog.title} height={200} width={200} unoptimized/>
             <div className="" dangerouslySetInnerHTML={{ __html: blog.blog_full_data }}></div>
           </div>
     

@@ -103,7 +103,7 @@ export default function Navbar({data}) {
 
   return (
     <header className="w-full bg-white sticky top-0 z-10" ref={pageRef}>
-      <nav className="py-5 container-width">
+      <nav className="py-2 md:py-4 container-width">
         {/* {token && <h2>Login</h2>} */}
         <div className="flex items-center justify-between relative">
           <a href="/">
@@ -111,8 +111,8 @@ export default function Navbar({data}) {
           </a>
 
           <div>
-            {!isOpen && <Menu className="lg:hidden" size={40} onClick={() => setIsOpen(!isOpen)} />}
-            {isOpen && <X className="lg:hidden" size={40} onClick={() => setIsOpen(!isOpen)}/> }
+            {!isOpen && <Menu className="lg:hidden" size={28} onClick={() => setIsOpen(!isOpen)} />}
+            {isOpen && <X className="lg:hidden" size={28} onClick={() => setIsOpen(!isOpen)}/> }
           </div>
 
           {/* desktop menu  */}
@@ -128,7 +128,7 @@ export default function Navbar({data}) {
                 {token  ? (
                   <div>
                     <div className="w-22 flex justify-center">
-                      <Image onClick={() => setShowUserModal(prev => !prev)} className="cursor-pointer" src="/assets/img/user.png" width={35} height={35} alt="Logo" unoptimized/>
+                      <Image onClick={() => setShowUserModal(prev => !prev)} className="cursor-pointer" src="/assets/img/user.png" width={30} height={30} alt="Logo" unoptimized/>
                     </div>
 
                     {showUserModal && (
